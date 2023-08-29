@@ -1,4 +1,4 @@
-const { getAllDrivers, getDriversByYear } = require("../../services/F1/piloto")
+const { getAllDrivers, getDriversByYear, getDriverById } = require("../../services/F1/piloto")
 
 async function getPilotos(req, res) {
     try {
@@ -25,7 +25,22 @@ async function getPilotosPorAno(req, res) {
     }
 }
 
+async function getPilotoPorId(req, res) {
+    try {
+        const id = req.params.id
+
+        if (id && Number(id)) {
+            const piloto = await getDriverById(id)
+            res.send(piloto)
+        } else {
+            res.status(422).send("Id inválido!")
+        }
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+}
 module.exports = {
     getPilotos,
-    getPilotosPorAno
+    getPilotosPorAno,
+    getPilotoPorId
 }

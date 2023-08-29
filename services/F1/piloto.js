@@ -18,7 +18,17 @@ async function getDriversByYear(year) {
     }
 }
 
+async function getDriverById(id) {
+    try {
+        const response = await axios.get(`http://ergast.com/api/f1/drivers/${id}`)
+        return response.data
+    } catch (error) {
+        throw error
+    }
+}
+
 module.exports = {
     getAllDrivers,
-    getDriversByYear
+    getDriversByYear,
+    getDriverById
 }
