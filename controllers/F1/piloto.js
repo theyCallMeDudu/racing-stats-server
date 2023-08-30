@@ -29,7 +29,7 @@ async function getPilotoPorId(req, res) {
     try {
         const id = req.params.id
 
-        if (id && Number(id)) {
+        if (id && String(id)) {
             const piloto = await getDriverById(id)
             res.send(piloto)
         } else {
